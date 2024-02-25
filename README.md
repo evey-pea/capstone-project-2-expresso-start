@@ -1,10 +1,15 @@
 # Expresso
 
+## Student Notes
+
+See the Codecademy forums for this [post](https://discuss.codecademy.com/t/expresso-project-installing-dependencies/608446) on installing with newer versions of Node.js
+
 ## Project Overview
 
 In this capstone project, you will build all of the routing and database logic for an internal tool for a coffee shop called Expresso.
 
 The Expresso internal tool should allow users to:
+
 - Create, view, update, and delete menus
 - Create, view, update, and delete menu items
 - Create, view, update, and delete employees
@@ -32,34 +37,38 @@ To test this functionality you can run the testing suite and interact with the A
 We've provided an empty **migration.js** file for you to write table creation logic in.
 
 In order for the tests and provided front-end to run properly, you will need to make sure to:
+
 - Create and export your Express app from a root-level file called **server.js**
 - Accept and set an optional port argument for your server to listen on from `process.env.PORT`
 - If `process.env.PORT` is not set, server should run on port `4000` (this is where the provided front-end will make requests to)
 - Accept and set an optional database file argument from `process.env.TEST_DATABASE` in all Express route files that open and modify your database
 - Use the root-level **database.sqlite** as your API's database
-- **Note:** When loading **database.sqlite** in your JavaScript files, sqlite3 will always try to load **database.sqlite** from the root directory path, `./database.sqlite`, regardless of where the current file is located. Therefore your code will always be `new sqlite3.Database(process.env.TEST_DATABASE || './database.sqlite')` regardless of the file you are writing in 
+- **Note:** When loading **database.sqlite** in your JavaScript files, sqlite3 will always try to load **database.sqlite** from the root directory path, `./database.sqlite`, regardless of where the current file is located. Therefore your code will always be `new sqlite3.Database(process.env.TEST_DATABASE || './database.sqlite')` regardless of the file you are writing in
 
 ### Database Table Properties
 
-* **Employee**
+- **Employee**
+
   - id - Integer, primary key, required
   - name - Text, required
   - position - Text, required
   - wage - Integer, required
   - is_current_employee - Integer, defaults to `1`
 
-* **Timesheet**
+- **Timesheet**
+
   - id - Integer, primary key, required
   - hours - Integer, required
   - rate - Integer, required
   - date - Integer, required
   - employee_id - Integer, foreign key, required
 
-* **Menu**
+- **Menu**
+
   - id - Integer, primary key, required
   - title - Text, required
 
-* **MenuItem**
+- **MenuItem**
   - id - Integer, primary key, required
   - name - Text, required
   - description - Text, optional
@@ -70,6 +79,7 @@ In order for the tests and provided front-end to run properly, you will need to 
 ### Route Paths and Functionality
 
 **/api/employees**
+
 - GET
   - Returns a 200 response containing all saved currently-employed employees (`is_current_employee` is equal to `1`) on the `employees` property of the response body
 - POST
@@ -77,6 +87,7 @@ In order for the tests and provided front-end to run properly, you will need to 
   - If any required fields are missing, returns a 400 response
 
 **/api/employees/:employeeId**
+
 - GET
   - Returns a 200 response containing the employee with the supplied employee ID on the `employee` property of the response body
   - If an employee with the supplied employee ID doesn't exist, returns a 404 response
@@ -89,6 +100,7 @@ In order for the tests and provided front-end to run properly, you will need to 
   - If an employee with the supplied employee ID doesn't exist, returns a 404 response
 
 **/api/employees/:employeeId/timesheets**
+
 - GET
   - Returns a 200 response containing all saved timesheets related to the employee with the supplied employee ID on the `timesheets` property of the response body
   - If an employee with the supplied employee ID doesn't exist, returns a 404 response
@@ -98,6 +110,7 @@ In order for the tests and provided front-end to run properly, you will need to 
   - If an employee with the supplied employee ID doesn't exist, returns a 404 response
 
 **/api/employees/:employeeId/timesheets/:timesheetId**
+
 - PUT
   - Updates the timesheet with the specified timesheet ID using the information from the `timesheet` property of the request body and saves it to the database. Returns a 200 response with the updated timesheet on the `timesheet` property of the response body
   - If any required fields are missing, returns a 400 response
@@ -109,6 +122,7 @@ In order for the tests and provided front-end to run properly, you will need to 
   - If an timesheet with the supplied timesheet ID doesn't exist, returns a 404 response
 
 **/api/menus**
+
 - GET
   - Returns a 200 response containing all saved menus on the `menus` property of the response body
 - POST
@@ -116,6 +130,7 @@ In order for the tests and provided front-end to run properly, you will need to 
   - If any required fields are missing, returns a 400 response
 
 **/api/menus/:menuId**
+
 - GET
   - Returns a 200 response containing the menu with the supplied menu ID on the `menu` property of the response body
   - If a menu with the supplied menu ID doesn't exist, returns a 404 response
@@ -129,6 +144,7 @@ In order for the tests and provided front-end to run properly, you will need to 
   - If a menu with the supplied menu ID doesn't exist, returns a 404 response
 
 **/api/menus/:menuId/menu-items**
+
 - GET
   - Returns a 200 response containing all saved menu items related to the menu with the supplied menu ID on the `menu items` property of the response body
   - If a menu with the supplied menu ID doesn't exist, returns a 404 response
@@ -138,6 +154,7 @@ In order for the tests and provided front-end to run properly, you will need to 
   - If a menu with the supplied menu ID doesn't exist, returns a 404 response
 
 **/api/menus/:menuId/menu-items/:menuItemId**
+
 - PUT
   - Updates the menu item with the specified menu item ID using the information from the `menuItem` property of the request body and saves it to the database. Returns a 200 response with the updated menu item on the `menuItem` property of the response body
   - If any required fields are missing, returns a 400 response
@@ -147,7 +164,6 @@ In order for the tests and provided front-end to run properly, you will need to 
   - Deletes the menu item with the supplied menu item ID from the database. Returns a 204 response.
   - If a menu with the supplied menu ID doesn't exist, returns a 404 response
   - If a menu item with the supplied menu item ID doesn't exist, returns a 404 response
-
 
 ## Testing
 
