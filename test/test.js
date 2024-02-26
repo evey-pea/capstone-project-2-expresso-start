@@ -3,12 +3,11 @@ process.env.TEST_DATABASE = "./test/test.sqlite";
 
 import { expect } from "chai";
 import supertest from "supertest";
-const request = supertest;
 import sqlite3 from "sqlite3";
 import { app } from "../server.js";
-
 import seed from "./seed.js";
 
+const request = supertest;
 const prodDb = new sqlite3.Database("./database.sqlite");
 const testDb = new sqlite3.Database(process.env.TEST_DATABASE);
 
